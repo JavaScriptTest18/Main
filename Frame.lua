@@ -41,6 +41,24 @@ local SkyBoxes = {
 }
 
 --Functions
+function Framework:CheckSkins()
+	local tbl = {}
+	for i,v in pairs(game:GetService("ReplicatedStorage").ItemSkins:GetChildren()) do
+		table.insert(tbl,v.Name)
+	end
+	return tbl
+end
+function Framework:SetCammo(SkinName)
+    if not require(game:GetService("ReplicatedStorage").ItemConfigs[getrenv()._G.modules.FPS.GetEquippedItem().id]).HandModel then return end
+	local GunName = require(game:GetService("ReplicatedStorage").ItemConfigs[getrenv()._G.modules.FPS.GetEquippedItem().id]).HandModel
+    if table.find(CheckSkins(),GunName) then
+	    local SkinFolder = game:GetService("ReplicatedStorage").ItemSkins[GunName]
+        if game:GetService("ReplicatedStorage").ItemSkins[GunName]:FindFirstChild(GunName.."_"..SkinName) then
+	        local SkinChosen = game:GetService("ReplicatedStorage").ItemSkins[GunName][GunName.."_"..SkinName]
+		    require(SkinChosen).ApplyToModel(game:GetService("Workspace").Ignore.FPSArms.HandModel)
+        end
+	end
+end
 function Framework:TeamCheck(Model)
     if Model:FindFirstChild("Head") and Model.Head:FindFirstChild("Teamtag") then
         return Model.Head.Teamtag.Enabled
