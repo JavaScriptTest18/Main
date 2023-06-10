@@ -1,4 +1,4 @@
-print("Framework Version: v1.15\nLoading")
+print("Framework Version: v1.16 Skin Update\nLoading")
 
 --Undected?
 local FovFunction = nil
