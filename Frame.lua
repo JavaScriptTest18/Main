@@ -24,7 +24,7 @@ local Sky = Lighting:FindFirstChildOfClass("Sky")
 if not Sky then Sky = Instance.new("Sky",Lighting) end
 
 --Tables
-local Framework = {Settings={FullBright=false,Fov=90,LocalChams=false,LocalGunChams=false}}
+local Framework = {Settings={FullBright=false,Fov=90,LocalChams=false,LocalGunChams=false},SkinChanger={SkinsEnabled=false,SkinChoice="Galaxy"}}
 local Esp = {Settings={PlayerTool=false,Boxes=false,Distances=false,Armor=false,ItemDistances=false,ItemNames=false,OreDistances=false,OreNames=false,PlayerRenderDistance=1000,ItemRenderDistance=1000,OreRenderDistance=1000,PlayerBoxColor=Color3.fromRGB(120,81,169),PlayerDistanceColor=Color3.fromRGB(120,81,169),PlayerArmorColor=Color3.fromRGB(120,81,169),Sleeping=false,PlayerSleepingColor=Color3.fromRGB(120,81,169),LocalChamsColor=Color3.fromRGB(120,81,169),LocalGunChamsColor=Color3.fromRGB(120,81,169),PlayerToolColor=Color3.fromRGB(120,81,169),LocalChamsMaterial=Enum.Material.ForceField,LocalGunChamsMaterial=Enum.Material.ForceField,TeamCheck=false},Drawings={},Connections={}}
 local Crosshair = {Enabled=false,CrosshairThickness=2,CrosshairSize=8,CrosshairColor=Color3.fromRGB(255,0,255),X,Y,X1,Y1,X2,Y2,X3,Y3,Spin=false,CrosshairOffset=3}
 local Aimbot = {Settings={FovEnabled=false,FovTransparency=1,FovSize=90,FovFilled=false,FovColor=Color3.fromRGB(120,81,169),TargetSleepers=false,Prediction=false,DropPrediction=false,HighlightTarget=false,TeamCheckSilent=false},Fov={},FovCircleDrawing=nil,AimbotHitpart="Head",AimbotSmoothing=3,HighlightedTarget=nil}
