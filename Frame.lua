@@ -120,14 +120,14 @@ function Framework:CheckTools(PlayerTable)
     return "No Tool"
 end
 function Framework:CheckTools(PlayerTable)
-    if PlayerTable["equippedItem"] then
-        if table.find(GetToolNames,PlayerTable["equippedItem"].id) then
-            return PlayerTable["equippedItem"].id
-        end
-    elseif PlayerTable["handModel"] and string.find(PlayerTable["handModel"].Name,"Hammer") then
+    if not PlayerTable then return end
+    if PlayerTable.equippedItem and table.find(GetToolNames(),PlayerTable["equippedItem"].id) then
+        return tostring(PlayerTable["equippedItem"].id)
+    elseif PlayerTable.handModel and PlayerTable.handModel.Name and string.find(PlayerTable.handModel.Name,"Hammer") then
         return PlayerTable["handModel"].Name
+    else
+        return "No Tool"
     end
-    return "No Tool"
 end
 function Framework:GetHoldingTool()
     if getrenv()._G.modules.FPS.GetEquippedItem().id == nil then return "None" end
