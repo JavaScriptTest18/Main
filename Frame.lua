@@ -120,6 +120,16 @@ function Framework:GetToolNames()
     end
     return tbl
 end
+function Framework:CheckTools(PlayerTable)
+    if PlayerTable["equippedItem"] then
+        if table.find(GetToolNames,PlayerTable["equippedItem"].id) then
+            return PlayerTable["equippedItem"].id
+        end
+    elseif PlayerTable["handModel"] and string.find(PlayerTable["handModel"].Name,"Hammer") then
+        return PlayerTable["handModel"].Name
+    end
+    return "No Tool"
+end
 function Framework:GetHoldingTool()
     if getrenv()._G.modules.FPS.GetEquippedItem().id == nil then return "None" end
     return getrenv()._G.modules.FPS.GetEquippedItem().id
@@ -392,18 +402,40 @@ do
                 else
                     ArmorText.Visible = false
                 end
+                if Visible == true and Esp.Settings.PlayerTool == true and Framework:DistanceFromCharacter(Model:GetPivot().p) <= Esp.Settings.PlayerRenderDistance then
+                    if Model == Aimbot.HighlightedTarget then
+                        ToolName.Color = Color3.fromRGB(0,0,0)
+                    else
+                        ToolName.Color = Esp.Settings.PlayerToolColor
+                    end
+                    --Text
+                    ToolName.Text = Framework:CheckTools()
+                    if Esp.TeamCheck == true and Framework:TeamCheck(Model) == false then 
+                        ToolName.Visible = true
+                    elseif Esp.TeamCheck == true and Framework:TeamCheck(Model) == true then
+                        ToolName.Visible = false
+                    else
+                        ToolName.Visible = true
+                    end
+                    ToolName.Color = Esp.Settings.PlayerToolColor
+                    ToolName.Position = Vector2.new(x, math.floor(y-h*0.5+ToolName.TextBounds.Y))
+                else
+                    ToolName.Visible = false
+                end
             else
                 Box.Visible = false
                 BoxOutline.Visible = false
                 ArmorText.Visible = false
                 DistanceText.Visible = false
                 SleepingText.Visible = false
+                ToolName.Visible = false
                 if not Model then
                     SleepingText:Remove()
                     Box:Remove()
                     DistanceText:Remove()
                     BoxOutline:Remove()
                     ArmorText:Remove()
+                    ToolName:Remove()
                     Render:Disconnect()
                 end
             end
