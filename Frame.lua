@@ -417,7 +417,11 @@ do
                         ToolName.Visible = true
                     end
                     ToolName.Color = Esp.Settings.PlayerToolColor
-                    ToolName.Position = Vector2.new(x, math.floor(y-h*0.5+ToolName.TextBounds.Y))
+                    if SleepingText.Visible == true then
+                        ToolName.Position = Vector2.new(x, math.floor(y-h*0.5-ToolName.TextBounds.Y*2))
+                    else
+                        ToolName.Position = Vector2.new(x, math.floor(y-h*0.5-ToolName.TextBounds.Y))
+                    end
                 else
                     ToolName.Visible = false
                 end
