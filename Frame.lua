@@ -586,19 +586,19 @@ function Aimbot:CreateFov()
 end
 
 function Aimbot:GetClosest()
-    local closest,PlayerDistance = nil,Esp.Settings.PlayerRenderDistance
+    local closest,PlayerDistance,PlayerTable = nil,Esp.Settings.PlayerRenderDistance, nil
     for i,v in pairs(Framework:GetPlayers()) do
         if v.model:FindFirstChild("HumanoidRootPart") then
             local pos = Camera.WorldToViewportPoint(Camera, v.model:GetPivot().Position)
             local MouseMagnitude = (Vector2.new(pos.X, pos.Y) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
             local PlayerDistance = Framework:DistanceFromCharacter(v.model:GetPivot().Position)
 
-            if Aimbot.Settings.TargetSleepers == true and Framework:IsSleeping(v.model) == false then
+            if Aimbot.Settings.TargetSleepers == true and (v.sleeping == false or v.sleeping == true) then
                 if MouseMagnitude <= Aimbot.Settings.FovSize and PlayerDistance <= Esp.Settings.PlayerRenderDistance then
                     closest = v.model
                     PlayerDistance = PlayerDistance
                 end
-            elseif Aimbot.Settings.TargetSleepers == false then
+            elseif Aimbot.Settings.TargetSleepers == false and v.sleeping == false then
                 if MouseMagnitude <= Aimbot.Settings.FovSize and PlayerDistance <= Esp.Settings.PlayerRenderDistance then
                     closest = v.model
                     PlayerDistance = PlayerDistance
