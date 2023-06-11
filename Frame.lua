@@ -68,17 +68,6 @@ end
 function Framework:SetFov(Number)
     setupvalue(FovFunction,17,Number)
 end
-function Framework:IsSleeping(Model)
-    if Model and Model:FindFirstChild("AnimationController") and Model.AnimationController:FindFirstChild("Animator") then
-        for i,v in pairs(Model.AnimationController.Animator:GetPlayingAnimationTracks()) do
-            if v.Animation.AnimationId == "rbxassetid://12501841745" then
-                return true
-            else
-                return false
-            end
-        end
-    end
-end
 function Framework:IsVisible(PlayerModel)
     local parts = Camera:GetPartsObscuringTarget({PlayerModel:GetPivot().Position},game:GetService("Workspace").Ignore:GetDescendants())
     if #parts > 0 then
