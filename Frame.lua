@@ -353,7 +353,7 @@ function PlayerViewer:Add(Text,Centered)
     local TextAmmount = #PlayerViewer.Settings.Texts
     MainBox.Size = Vector2(MainBox.Size.X,20*TextAmmount);Text.Position = MainBox.Position + Vector2.new(5, (TextAmmount - 1) * 20)
     if Centered == true then
-        Text.Position + Vector2.new(MainBox.Size.X / 2, 0)
+        Text.Position = MainBox.Position + Vector2.new(MainBox.Size.X / 2, 0)
     else
         Text.Position = MainBox.Position + Vector2.new(15, (TextAmmount - 1) * 20)
     end
