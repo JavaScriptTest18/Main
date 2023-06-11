@@ -346,9 +346,9 @@ function PlayerViewer:Empty()
         PlayerViewer.Settings.Texts[i] = nil
     end
 end
-function PlayerViewer:Add(Text,Centered)
+function PlayerViewer:Add(TextPart,Centered)
     local MainBox = PlayerViewer.Settings.Box
-    local Text = Framework:Draw("Text", {Text=Text,Color=Color3.fromRGB(255,255,255),Size=13,Font = 2,Outline=true,Visible=true,Center=Centered})
+    local Text = Framework:Draw("Text", {Text=Text,Color=Color3.fromRGB(255,255,255),Size=13,Font = 2,Outline=true,Visible=true,Center=Centered,Text=TextPart})
     table.insert(PlayerViewer.Settings.Texts, Text)
     local TextAmmount = #PlayerViewer.Settings.Texts
     MainBox.Size = Vector2(MainBox.Size.X,20*TextAmmount);Text.Position = MainBox.Position + Vector2.new(5, (TextAmmount - 1) * 20)
