@@ -111,14 +111,15 @@ function Framework:GetArmor(Model)
         return false
     end
 end
-function Framework:GetToolNames()
-    tbl = {}
-    for i,v in pairs(game:GetService("ReplicatedStorage").HandModels:GetChildren()) do
-        if not table.find(tbl,v.Name) then
-            table.insert(tbl,v.Name)
+function Framework:CheckTools(PlayerTable)
+    if PlayerTable.equippedItem then
+        if table.find(Framework:GetToolNames(),PlayerTable["equippedItem"].id) then
+            return PlayerTable["equippedItem"].id
         end
+    elseif PlayerTable["handModel"] and string.find(PlayerTable["handModel"].Name,"Hammer") then
+        return PlayerTable["handModel"].Name
     end
-    return tbl
+    return "No Tool"
 end
 function Framework:CheckTools(PlayerTable)
     if PlayerTable["equippedItem"] then
