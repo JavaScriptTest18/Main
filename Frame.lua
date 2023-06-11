@@ -674,4 +674,4 @@ end
 
 print("Loaded In: "..tick()-oldtick)
 
-return Framework, Esp, Aimbot, Crosshair
+return Framework, Esp, Aimbot, Crosshair, PlayerViewer 
