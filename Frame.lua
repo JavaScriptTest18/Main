@@ -1,4 +1,4 @@
-print("Framework Version: v1.17\nLoading")
+print("Framework Version: v1.18 Player Viewer\nLoading")
 
 --Undected?
 local FovFunction = nil
@@ -346,13 +346,17 @@ function PlayerViewer:Empty()
         PlayerViewer.Settings.Texts[i] = nil
     end
 end
-function PlayerViewer:Add(TextPart,Centered)
+function PlayerViewer:Add(Text,Centered)
     local MainBox = PlayerViewer.Settings.Box
-    local Text = Framework:Draw("Text", {Text=Text,Color=Color3.fromRGB(255,255,255),Size=13,Font = 2,Outline=true,Visible=true,Center=Centered,Text=TextPart})
+    local Text = Framework:Draw("Text", {Text=Text,Color=Color3.fromRGB(255,255,255),Size=13,Font = 2,Outline=true,Visible=true,Center=Centered})
     table.insert(PlayerViewer.Settings.Texts, Text)
     local TextAmmount = #PlayerViewer.Settings.Texts
-    MainBox.Size = Vector2.new(MainBox.Size.X,20*TextAmmount);Text.Position = MainBox.Position + Vector2.new(5, (TextAmmount - 1) * 20)
-    Text.Position = MainBox.Position + Vector2.new(15, (TextAmmount - 1) * 20)
+    MainBox.Size = Vector2(MainBox.Size.X,20*TextAmmount);Text.Position = MainBox.Position + Vector2.new(5, (TextAmmount - 1) * 20)
+    if Centered == true then
+        Text.Position + Vector2.new(MainBox.Size.X / 2, 0)
+    else
+        Text.Position = MainBox.Position + Vector2.new(15, (TextAmmount - 1) * 20)
+    end
     return Text
 end
 function PlayerViewer:Update()
