@@ -582,12 +582,12 @@ function Aimbot:GetClosest()
             local MouseMagnitude = (Vector2.new(pos.X, pos.Y) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
             local PlayerDistance = Framework:DistanceFromCharacter(v.model:GetPivot().Position)
 
-            if Aimbot.Settings.TargetSleepers == true and (v.sleeping == false or v.sleeping == true) then
+            if Aimbot.Settings.TargetSleepers == true then
                 if MouseMagnitude <= Aimbot.Settings.FovSize and PlayerDistance <= Esp.Settings.PlayerRenderDistance then
                     closest = v.model
                     PlayerDistance = PlayerDistance
                 end
-            elseif Aimbot.Settings.TargetSleepers == false and v.sleeping == false then
+            elseif Aimbot.Settings.TargetSleepers == false then
                 if MouseMagnitude <= Aimbot.Settings.FovSize and PlayerDistance <= Esp.Settings.PlayerRenderDistance then
                     closest = v.model
                     PlayerDistance = PlayerDistance
