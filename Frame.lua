@@ -409,7 +409,7 @@ do
                         ToolName.Color = Esp.Settings.PlayerToolColor
                     end
                     --Text
-                    ToolName.Text = Framework:CheckTools()
+                    ToolName.Text = Framework:CheckTools(PlayerTable)
                     if Esp.TeamCheck == true and Framework:TeamCheck(Model) == false then 
                         ToolName.Visible = true
                     elseif Esp.TeamCheck == true and Framework:TeamCheck(Model) == true then
