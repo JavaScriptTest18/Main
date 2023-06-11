@@ -399,9 +399,9 @@ do
                     end
                     ArmorText.Color = Esp.Settings.PlayerArmorColor
                     if DistanceText.Visible == true then
-                        ArmorText.Position = Vector2.new(x, math.floor(y-h*0.5-ArmorText.TextBounds.Y))
+                        ArmorText.Position = Vector2.new(x, math.floor(y+h*0.5)+ArmorText.TextBounds.Y)
                     else
-                        ArmorText.Position = Vector2.new(x, math.floor(y+h*0.5+ArmorText.TextBounds.Y*2))
+                        ArmorText.Position = Vector2.new(x, math.floor(y+h*0.5))
                     end
                 else
                     ArmorText.Visible = false
