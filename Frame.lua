@@ -39,6 +39,7 @@ local SkyBoxes = {
     ["Clouded Sky"] = {["SkyboxBk"]="rbxassetid://252760981",["SkyboxDn"]="rbxassetid://252763035",["SkyboxFt"]="rbxassetid://252761439",["SkyboxLf"]="rbxassetid://252760980",["SkyboxRt"]="rbxassetid://252760986",["SkyboxUp"]="rbxassetid://252762652"},
     --["test"] = {"SkyboxBk"="rbxassetid://","SkyboxDn"="rbxassetid://","SkyboxFt"="rbxassetid://","SkyboxLf"="rbxassetid://","SkyboxRt"="rbxassetid://","SkyboxUp"="rbxassetid://"},
 }
+local PlayerViewer = {Settings={Size=Vector2.new(200, 20),Box=nil,BoxTop=nil,BoxOut=nil,BackgroundColor=Color3.fromRGB(17,17,23),Texts={}}}
 
 --Functions
 function Framework:CheckSkins()
@@ -314,6 +315,66 @@ function Esp:GetBoxPosAndSize(Object)
        return math.floor(left.X),math.floor(right.X),math.floor(top.Y),math.floor(bottom.Y)
     end
 end
+
+
+--Armor Viewer
+PlayerViewer.Settings.Box = Framework:Draw("Square",{Thickness=1,Filled=true,Color = PlayerViewer.Settings.BackgroundColor,ZIndex = -9,Visible=false})
+PlayerViewer.Settings.BoxTop = Framework:Draw("Square",{Thickness=1,Filled=true,Color = Color3.fromRGB(255,0,76),ZIndex = -9,Visible=false})
+PlayerViewer.Settings.BoxOut = Framework:Draw("Square",{Thickness=1,Filled=true,Color = Color3.fromRGB(26,26,32),ZIndex = -9,Visible=false})
+
+PlayerViewer.Settings.Box.Size = PlayerViewer.Settings.Size
+PlayerViewer.Settings.Box.Position = Vector2.new(Camera.ViewportSize.X/Camera.ViewportSize.X,Camera.ViewportSize.Y/3)
+PlayerViewer.Settings.BoxTop.Size = Vector2.new(PlayerViewer.Settings.Box.Size.X,2)
+PlayerViewer.Settings.BoxTop.Position = PlayerViewer.Settings.Box.Position + Vector2.new(0,1)
+PlayerViewer.Settings.BoxOut.Size = Vector2.new(PlayerViewer.Settings.Box.Size.X+1,PlayerViewer.Settings.Box.Size.Y)
+PlayerViewer.Settings.BoxOut.Position = PlayerViewer.Settings.Box.Position
+
+function PlayerViewer:Toggle(Toggle)
+    if Toggle == true then
+        PlayerViewer.Settings.Box.Visible = Toggle
+        PlayerViewer.Settings.BoxOut.Visible = Toggle
+        PlayerViewer.Settings.BoxTop.Visible = Toggle
+    else
+        PlayerViewer.Settings.Box.Visible = Toggle
+        PlayerViewer.Settings.BoxOut.Visible = Toggle
+        PlayerViewer.Settings.BoxTop.Visible = Toggle
+    end
+end
+function PlayerViewer:Empty()
+    for i, v in pairs(PlayerViewer.Settings.Texts) do
+        v:Remove()
+        PlayerViewer.Settings.Texts[i] = nil
+    end
+end
+function PlayerViewer:Add(Text,Centered)
+    local MainBox = PlayerViewer.Settings.Box
+    local Text = Framework:Draw("Text", {Text=Text,Color=Color3.fromRGB(255,255,255),Size=13,Font = 2,Outline=true,Visible=true,Center=Centered})
+    table.insert(PlayerViewer.Settings.Texts, Text)
+    local TextAmmount = #PlayerViewer.Settings.Texts
+    MainBox.Size = Vector2(MainBox.Size.X,20*TextAmmount);Text.Position = MainBox.Position + Vector2.new(5, (TextAmmount - 1) * 20)
+    Text.Position = MainBox.Position + Vector2.new(15, (TextAmmount - 1) * 20)
+    return Text
+end
+function PlayerViewer:Update()
+    local Player = Aimbot:GetClosest()
+    if Player == nil then
+        PlayerViewer:Empty()
+        PlayerViewer:Toggle(false)
+    else
+        PlayerViewer:Empty()
+        PlayerViewer:Toggle(true)
+        PlayerViewer:Add("Player Viewer",true)
+        if Player and Player.Armor:FindFirstChildOfClass("Folder") then
+            for i,v in pairs(Player.Armor:GetChildren()) do
+                PlayerViewer:Add(v.Name,false)
+            end
+        else
+            PlayerViewer:Empty()
+            PlayerViewer:Toggle(false)
+        end
+    end
+end
+
 
 --Esp Loops
 do
