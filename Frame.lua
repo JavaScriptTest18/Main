@@ -112,14 +112,6 @@ function Framework:GetArmor(Model)
     end
 end
 function Framework:CheckTools(PlayerTable)
-    if PlayerTable.equippedItem then
-        return PlayerTable["equippedItem"].id
-    elseif PlayerTable["handModel"] and string.find(PlayerTable["handModel"].Name,"Hammer") then
-        return PlayerTable["handModel"].Name
-    end
-    return "No Tool"
-end
-function Framework:CheckTools(PlayerTable)
     if not PlayerTable then return end
     if PlayerTable.equippedItem and table.find(GetToolNames(),PlayerTable["equippedItem"].id) then
         return tostring(PlayerTable["equippedItem"].id)
