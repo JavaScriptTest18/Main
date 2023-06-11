@@ -351,7 +351,8 @@ function PlayerViewer:Add(Text,Centered)
     local Text = Framework:Draw("Text", {Text=Text,Color=Color3.fromRGB(255,255,255),Size=13,Font = 2,Outline=true,Visible=true,Center=Centered})
     table.insert(PlayerViewer.Settings.Texts, Text)
     local TextAmmount = #PlayerViewer.Settings.Texts
-    MainBox.Size = Vector2.new(MainBox.Size.X,20*TextAmmount);Text.Position = MainBox.Position + Vector2.new(5, (TextAmmount - 1) * 20)
+    MainBox.Size = Vector2.new(MainBox.Size.X,20*TextAmmount)
+    Text.Position = MainBox.Position + Vector2.new(5, (TextAmmount - 1) * 20)
     if Centered == true then
         Text.Position = MainBox.Position + Vector2.new(MainBox.Size.X / 2, 0)
     else
