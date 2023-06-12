@@ -39,7 +39,7 @@ local SkyBoxes = {
     ["Clouded Sky"] = {["SkyboxBk"]="rbxassetid://252760981",["SkyboxDn"]="rbxassetid://252763035",["SkyboxFt"]="rbxassetid://252761439",["SkyboxLf"]="rbxassetid://252760980",["SkyboxRt"]="rbxassetid://252760986",["SkyboxUp"]="rbxassetid://252762652"},
     --["test"] = {"SkyboxBk"="rbxassetid://","SkyboxDn"="rbxassetid://","SkyboxFt"="rbxassetid://","SkyboxLf"="rbxassetid://","SkyboxRt"="rbxassetid://","SkyboxUp"="rbxassetid://"},
 }
-local PlayerViewer = {Settings={Size=Vector2.new(200, 20),Box=nil,BoxTop=nil,BoxOut=nil,BackgroundColor=Color3.fromRGB(17,17,23),Texts={}}}
+local PlayerViewer = {Settings={Size=Vector2.new(160, 20),Box=nil,BoxTop=nil,BoxOut=nil,BackgroundColor=Color3.fromRGB(17,17,23),Texts={}}}
 
 --Functions
 function Framework:CheckSkins()
@@ -307,9 +307,9 @@ end
 
 
 --Armor Viewer
-PlayerViewer.Settings.Box = Framework:Draw("Square",{Thickness=1,Filled=true,Color = PlayerViewer.Settings.BackgroundColor,ZIndex = -9,Visible=false,Transparency=0})
-PlayerViewer.Settings.BoxTop = Framework:Draw("Square",{Thickness=1,Filled=true,Color = Color3.fromRGB(0,255,239),ZIndex = -9,Visible=false,Transparency=0})
-PlayerViewer.Settings.BoxOut = Framework:Draw("Square",{Thickness=1,Filled=true,Color = Color3.fromRGB(26,26,32),ZIndex = -9,Visible=false,Transparency=0})
+PlayerViewer.Settings.Box = Framework:Draw("Square",{Thickness=1,Filled=true,Color = PlayerViewer.Settings.BackgroundColor,ZIndex = -9,Visible=false,Transparency=1})
+PlayerViewer.Settings.BoxTop = Framework:Draw("Square",{Thickness=1,Filled=true,Color = Color3.fromRGB(0,255,239),ZIndex = -9,Visible=false,Transparency=1})
+PlayerViewer.Settings.BoxOut = Framework:Draw("Square",{Thickness=1,Filled=true,Color = Color3.fromRGB(26,26,32),ZIndex = -9,Visible=false,Transparency=1})
 
 PlayerViewer.Settings.Box.Size = PlayerViewer.Settings.Size
 PlayerViewer.Settings.Box.Position = Vector2.new(Camera.ViewportSize.X/Camera.ViewportSize.X,Camera.ViewportSize.Y/3)
@@ -337,7 +337,7 @@ function PlayerViewer:Empty()
 end
 function PlayerViewer:Add(Text,Centered)
     local MainBox = PlayerViewer.Settings.Box
-    local Text = Framework:Draw("Text", {Text=Text,Color=Color3.fromRGB(255,255,255),Size=13,Font = 2,Outline=true,Visible=true,Center=Centered,Transparency=0})
+    local Text = Framework:Draw("Text", {Text=Text,Color=Color3.fromRGB(255,255,255),Size=13,Font = 2,Outline=true,Visible=true,Center=Centered,Transparency=1})
     table.insert(PlayerViewer.Settings.Texts, Text)
     local TextAmmount = #PlayerViewer.Settings.Texts
     MainBox.Size = Vector2.new(MainBox.Size.X,20*TextAmmount)
@@ -373,7 +373,7 @@ end
 --Esp Loops
 do
     function Esp:AddPlayer(Model,PlayerTable)
-        local Box,BoxOutline,ArmorText,DistanceText,SleepingText,ToolName = Framework:Draw("Square",{Thickness=1,Filled=false,Color = Esp.Settings.PlayerBoxColor,ZIndex = -9,Transparency=0}),Framework:Draw("Square",{Thickness=2,Filled=false,Color = Color3.fromRGB(0,0,0),ZIndex = -10,Transparency=0}),Framework:Draw("Text",{Text = "Nil",Font=2,Size=13,Center=true,Outline=true,Color = Esp.Settings.PlayerArmorColor,ZIndex = -9}),Framework:Draw("Text",{Text ="",Font=2,Size=13,Center=true,Outline=true,Color = Esp.Settings.PlayerDistanceColor,ZIndex = -9}),Framework:Draw("Text",{Text ="",Font=2,Size=13,Center=true,Outline=true,Color = Esp.Settings.PlayerSleepingColor,ZIndex = -9}),Framework:Draw("Text",{Text ="",Font=2,Size=13,Center=true,Outline=true,Color = Esp.Settings.PlayerToolColor,ZIndex = -9})
+        local Box,BoxOutline,ArmorText,DistanceText,SleepingText,ToolName = Framework:Draw("Square",{Thickness=1,Filled=false,Color = Esp.Settings.PlayerBoxColor,ZIndex = -9,Transparency=1}),Framework:Draw("Square",{Thickness=2,Filled=false,Color = Color3.fromRGB(0,0,0),ZIndex = -10,Transparency=0}),Framework:Draw("Text",{Text = "Nil",Font=2,Size=13,Center=true,Outline=true,Color = Esp.Settings.PlayerArmorColor,ZIndex = -9}),Framework:Draw("Text",{Text ="",Font=2,Size=13,Center=true,Outline=true,Color = Esp.Settings.PlayerDistanceColor,ZIndex = -9}),Framework:Draw("Text",{Text ="",Font=2,Size=13,Center=true,Outline=true,Color = Esp.Settings.PlayerSleepingColor,ZIndex = -9}),Framework:Draw("Text",{Text ="",Font=2,Size=13,Center=true,Outline=true,Color = Esp.Settings.PlayerToolColor,ZIndex = -9})
         local Render = game:GetService("RunService").RenderStepped:Connect(function()
             if Model and Model:FindFirstChild("HumanoidRootPart") then
                 local Position,Visible = Camera:WorldToViewportPoint(Model:GetPivot().p)
