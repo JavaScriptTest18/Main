@@ -307,9 +307,9 @@ end
 
 
 --Armor Viewer
-PlayerViewer.Settings.Box = Framework:Draw("Square",{Thickness=1,Filled=true,Color = PlayerViewer.Settings.BackgroundColor,ZIndex = -9,Visible=false})
-PlayerViewer.Settings.BoxTop = Framework:Draw("Square",{Thickness=1,Filled=true,Color = Color3.fromRGB(255,0,76),ZIndex = -9,Visible=false})
-PlayerViewer.Settings.BoxOut = Framework:Draw("Square",{Thickness=1,Filled=true,Color = Color3.fromRGB(26,26,32),ZIndex = -9,Visible=false})
+PlayerViewer.Settings.Box = Framework:Draw("Square",{Thickness=1,Filled=true,Color = PlayerViewer.Settings.BackgroundColor,ZIndex = -9,Visible=false,Transparency=0.4})
+PlayerViewer.Settings.BoxTop = Framework:Draw("Square",{Thickness=1,Filled=true,Color = Color3.fromRGB(255,0,76),ZIndex = -9,Visible=false,Transparency=0.4})
+PlayerViewer.Settings.BoxOut = Framework:Draw("Square",{Thickness=1,Filled=true,Color = Color3.fromRGB(26,26,32),ZIndex = -9,Visible=false,Transparency=0.4})
 
 PlayerViewer.Settings.Box.Size = PlayerViewer.Settings.Size
 PlayerViewer.Settings.Box.Position = Vector2.new(Camera.ViewportSize.X/Camera.ViewportSize.X,Camera.ViewportSize.Y/3)
@@ -337,7 +337,7 @@ function PlayerViewer:Empty()
 end
 function PlayerViewer:Add(Text,Centered)
     local MainBox = PlayerViewer.Settings.Box
-    local Text = Framework:Draw("Text", {Text=Text,Color=Color3.fromRGB(255,255,255),Size=13,Font = 2,Outline=true,Visible=true,Center=Centered})
+    local Text = Framework:Draw("Text", {Text=Text,Color=Color3.fromRGB(255,255,255),Size=13,Font = 2,Outline=true,Visible=true,Center=Centered,Transparency=0.45})
     table.insert(PlayerViewer.Settings.Texts, Text)
     local TextAmmount = #PlayerViewer.Settings.Texts
     MainBox.Size = Vector2.new(MainBox.Size.X,20*TextAmmount)
