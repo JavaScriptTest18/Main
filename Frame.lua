@@ -639,21 +639,23 @@ function Aimbot:Predict(Model)
 end
 
 function Aimbot:SilentPredict(Model)
-    Prediction = Vector3.new(0,0,0)
-    if Model and Prediction then
-        local Velocity = Aimbot:GetVelocity(Model)
-        local PS,PD = Aimbot:GetProjectileInfo()
-        local Dist = (Model.HumanoidRootPart.Position - Camera.CFrame.Position).Magnitude
-        if Velocity == nil then Velocity = Model.HumanoidRootPart.Velocity end
-        if PS == 0 then 
-            PS = 800
-        else
-            PS = PS + 200
-        end
-        local TimeToTarget = Dist / PS
-        Prediction = Model[Aimbot.FovHitpartSilent].Position + (Velocity * TimeToTarget)
-    end
-    return Prediction
+    local velocity = Aimbot:GetVelocity(Model)
+    local projectileSpeed, _ = Aimbot:GetProjectileInfo()
+
+    local targetPart = Model.HumanoidRootPart
+    local cameraPosition = Camera.CFrame.p
+
+    local distance = (cameraPosition - targetPart.CFrame.p).Magnitude
+    local timeToHit = distance / projectileSpeed
+
+    local predictedPosition = targetPart.CFrame.p + (velocity * timeToHit)
+    local delta = (predictedPosition - targetPart.CFrame.p).Magnitude
+
+    local finalProjectileSpeed = projectileSpeed * projectileSpeed * timeToHit
+
+    timeToHit = timeToHit + (delta / finalProjectileSpeed)
+
+    return (velocity * timeToHit)
 end
 
 function Aimbot:PredictDrop(Model)
