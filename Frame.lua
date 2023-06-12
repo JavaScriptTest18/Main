@@ -339,7 +339,7 @@ end
 function PlayerViewer:SortText(Text)
     if not string.find(Text,"Light") and not string.find(Text,"Steel") then
 	return string.sub(Text,1,-(string.len(Text)-3)).." "..string.sub(Text,5)
-    esleif string.find(Text,"Steel") then
+    elseif string.find(Text,"Steel") then
 	return string.sub(Text,1,-(string.len(Text)-4)).." "..string.sub(Text,5) 
     elseif string.find(Text,"Light") then
 	return string.split(Text,"Light")[1].." Light"
