@@ -313,7 +313,7 @@ PlayerViewer.Settings.BoxOut = Framework:Draw("Square",{Thickness=1,Filled=false
 
 PlayerViewer.Settings.Box.Size = PlayerViewer.Settings.Size
 PlayerViewer.Settings.Box.Position = Vector2.new(Camera.ViewportSize.X/Camera.ViewportSize.X,Camera.ViewportSize.Y/3)
-PlayerViewer.Settings.BoxTop.Size = Vector2.new(PlayerViewer.Settings.Box.Size.X,10)
+PlayerViewer.Settings.BoxTop.Size = Vector2.new(PlayerViewer.Settings.Box.Size.X,2)
 PlayerViewer.Settings.BoxTop.Position = PlayerViewer.Settings.Box.Position + Vector2.new(0,1)
 PlayerViewer.Settings.BoxOut.Size = Vector2.new(PlayerViewer.Settings.Box.Size.X+1,PlayerViewer.Settings.Box.Size.Y)
 PlayerViewer.Settings.BoxOut.Position = PlayerViewer.Settings.Box.Position
@@ -323,6 +323,7 @@ function PlayerViewer:Toggle(Toggle)
         PlayerViewer.Settings.Box.Visible = Toggle
         PlayerViewer.Settings.BoxOut.Visible = Toggle
         PlayerViewer.Settings.BoxTop.Visible = Toggle
+	PlayerViewer.Settings.BoxOut.Size = Vector2.new(PlayerViewer.Settings.Box.Size.X+1,PlayerViewer.Settings.Box.Size.Y)
     else
         PlayerViewer.Settings.Box.Visible = Toggle
         PlayerViewer.Settings.BoxOut.Visible = Toggle
@@ -335,7 +336,7 @@ function PlayerViewer:Empty()
         PlayerViewer.Settings.Texts[i] = nil
     end
 end
-function PlayerViewer:Add(Text,Centered)
+function PlayerViewer:Add(Text,Centered,Title)
     local MainBox = PlayerViewer.Settings.Box
     local Text = Framework:Draw("Text", {Text=Text,Color=Color3.fromRGB(255,255,255),Size=13,Font = 2,Outline=true,Visible=true,Center=Centered,Transparency=1})
     table.insert(PlayerViewer.Settings.Texts, Text)
@@ -343,10 +344,11 @@ function PlayerViewer:Add(Text,Centered)
     MainBox.Size = Vector2.new(MainBox.Size.X,20*TextAmmount)
     Text.Position = MainBox.Position + Vector2.new(5, (TextAmmount - 1) * 20)
     if Centered == true then
-        Text.Position = MainBox.Position + Vector2.new(MainBox.Size.X / 2, 0)
+        Text.Position = MainBox.Position + Vector2.new(MainBox.Size.X / 2, 3)
     else
         Text.Position = MainBox.Position + Vector2.new(15, (TextAmmount - 1) * 20)
     end
+    PlayerViewer.Settings.BoxOut.Size = Vector2.new(PlayerViewer.Settings.Box.Size.X+1,PlayerViewer.Settings.Box.Size.Y)
     return Text
 end
 function PlayerViewer:Update()
