@@ -39,7 +39,7 @@ local SkyBoxes = {
     ["Clouded Sky"] = {["SkyboxBk"]="rbxassetid://252760981",["SkyboxDn"]="rbxassetid://252763035",["SkyboxFt"]="rbxassetid://252761439",["SkyboxLf"]="rbxassetid://252760980",["SkyboxRt"]="rbxassetid://252760986",["SkyboxUp"]="rbxassetid://252762652"},
     --["test"] = {"SkyboxBk"="rbxassetid://","SkyboxDn"="rbxassetid://","SkyboxFt"="rbxassetid://","SkyboxLf"="rbxassetid://","SkyboxRt"="rbxassetid://","SkyboxUp"="rbxassetid://"},
 }
-local PlayerViewer = {Settings={Size=Vector2.new(180, 20),Box=nil,BoxTop=nil,BoxOut=nil,BackgroundColor=Color3.fromRGB(17,17,23),Texts={}}}
+local PlayerViewer = {Settings={Size=Vector2.new(180, 20),Box=nil,BoxTop=nil,BoxOut=nil,BackgroundColor=Color3.fromRGB(17,17,19),Texts={}}}
 
 --Functions
 function Framework:CheckSkins()
@@ -339,8 +339,10 @@ end
 function PlayerViewer:SortText(Text)
     if not string.find(Text,"Light") then
 	return string.sub(Text,1,-(string.len(Text)-3)).." "..string.sub(Text,5)
-    else
+    elseif string.find(Text,"Light") then
 	return string.split(Text,"Light")[1].." Light"
+    else
+	return Text
     end	
 end
 function PlayerViewer:Add(Text,Centered,Title)
