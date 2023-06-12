@@ -337,8 +337,10 @@ function PlayerViewer:Empty()
     end
 end
 function PlayerViewer:SortText(Text)
-    if not string.find(Text,"Light") then
+    if not string.find(Text,"Light") and not string.find(Text,"Steel") then
 	return string.sub(Text,1,-(string.len(Text)-3)).." "..string.sub(Text,5)
+    esleif string.find(Text,"Steel") then
+	return string.sub(Text,1,-(string.len(Text)-4)).." "..string.sub(Text,5) 
     elseif string.find(Text,"Light") then
 	return string.split(Text,"Light")[1].." Light"
     else
@@ -347,7 +349,7 @@ function PlayerViewer:SortText(Text)
 end
 function PlayerViewer:Add(Text,Centered,Title)
     local MainBox = PlayerViewer.Settings.Box
-    local Text = Framework:Draw("Text", {Text=PlayerViewer:SortText(Text),Color=Color3.fromRGB(255,255,255),Size=13,Font = 2,Outline=true,Visible=true,Center=Centered,Transparency=1})
+    local Text = Framework:Draw("Text", {Text=PlayerViewer:SortText(Text),Color=Color3.fromRGB(255,255,255),Size=13,Font = 1,Outline=true,Visible=true,Center=Centered,Transparency=1})
     table.insert(PlayerViewer.Settings.Texts, Text)
     local TextAmmount = #PlayerViewer.Settings.Texts
     MainBox.Size = Vector2.new(MainBox.Size.X,20*TextAmmount)
