@@ -1,4 +1,4 @@
-print("Framework Version: v1.19A Color Fixes?\nLoading")
+print("Framework Version: v1.19B Player Viewer Fixes\nLoading")
 
 --Undected?
 local FovFunction = nil
