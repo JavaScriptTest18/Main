@@ -347,9 +347,14 @@ function PlayerViewer:SortText(Text)
 	return Text
     end	
 end
-function PlayerViewer:Add(Text,Centered,Title)
+function PlayerViewer:Add(Text2,Centered,Title)
     local MainBox = PlayerViewer.Settings.Box
-    local Text = Framework:Draw("Text", {Text=PlayerViewer:SortText(Text),Color=Color3.fromRGB(255,255,255),Size=13,Font = 1,Outline=true,Visible=true,Center=Centered,Transparency=1})
+    local Text = Framework:Draw("Text", {Text=Text2,Color=Color3.fromRGB(255,255,255),Size=13,Font = 1,Outline=true,Visible=true,Center=Centered,Transparency=1})
+    if Title == true then
+	Text.Text = Text2
+    else
+ 	PlayerViewer:SortText(Text2)
+    end
     table.insert(PlayerViewer.Settings.Texts, Text)
     local TextAmmount = #PlayerViewer.Settings.Texts
     MainBox.Size = Vector2.new(MainBox.Size.X,20*TextAmmount)
@@ -370,10 +375,10 @@ function PlayerViewer:Update()
     else
         PlayerViewer:Empty()
         PlayerViewer:Toggle(true)
-        PlayerViewer:Add("Player Viewer",true)
+        PlayerViewer:Add("Player Viewer",true,true)
         if Player and Player.Armor:FindFirstChildOfClass("Folder") then
             for i,v in pairs(Player.Armor:GetChildren()) do
-                PlayerViewer:Add(v.Name,false)
+                PlayerViewer:Add(v.Name,false,false)
             end
         else
             PlayerViewer:Empty()
