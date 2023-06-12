@@ -50,7 +50,7 @@ function Framework:CheckSkins()
     return tbl
 end
 function Framework:SetCammo(SkinName)
-    if not getrenv()._G.modules.FPS.GetEquippedItem() ~= nil and require(game:GetService("ReplicatedStorage").ItemConfigs[getrenv()._G.modules.FPS.GetEquippedItem().id]).HandModel then return end
+    if getrenv()._G.modules.FPS.GetEquippedItem() ~= nil and not require(game:GetService("ReplicatedStorage").ItemConfigs[getrenv()._G.modules.FPS.GetEquippedItem().id]).HandModel then return end
 	local GunName = require(game:GetService("ReplicatedStorage").ItemConfigs[getrenv()._G.modules.FPS.GetEquippedItem().id]).HandModel
     if table.find(Framework:CheckSkins(),GunName) then
 	    local SkinFolder = game:GetService("ReplicatedStorage").ItemSkins[GunName]
